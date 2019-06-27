@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import Contacts from './Components/Contacts'
 
-function App() {
+class App extends Component {
+
+  render(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App flex">
+        <Contacts className="w-30 bg-light-yellow vh-100 pa3" />
+        <div className="outline w-70 bg-moon-gray vh-100 pa3 fl">
+        </div>
     </div>
   );
+}
 }
 
 export default App;
