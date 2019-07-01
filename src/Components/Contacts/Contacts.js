@@ -121,7 +121,7 @@ class Contacts extends React.Component {
 			</div>
 
 
-			<div className="dtc w-70-ns pa1 ba b--black-20 bg-light-silver vh-100" >
+			<div className="dtc w6-ns pa1 ba b--black-20 bg-light-silver vh-100" >
 				{this.state.friend.name === ''?
 				<div className="tc f4">
 					<h1 className="">....................................................................</h1>
@@ -141,8 +141,39 @@ class Contacts extends React.Component {
 					  </div>
 					</div>
 
-					<div className="w-100 border-box bg-washed-yellow ph5 pv2 ph4-ns mv1" style={{height: '710px'}}>Filling it complete</div>
-
+					<Scroll className="bg-washed-yellow">
+						<div className="w-100 border-box bg-washed-yellow ph5 pv2 ph4-ns mv1 db" style={{height: '710px', fontFamily: 'Bree Serif' }} >
+							
+							<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
+								YoYo! Hello everyone this is Hemant And I'm working on a fantastic app
+							</p>
+							
+							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
+								Oh!!! That's good hemant.... Keep it up :D YoYo! Hello everyone this is Hemant And I'm working on a fantastic app
+							</p>
+							
+							<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
+								YoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic app
+							</p>
+							
+							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
+								Mention not bro YoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic app
+							</p>
+							
+							<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
+								Oh Thanks man !!
+							</p>
+							
+							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
+								Oh Thanks man 
+							</p>
+							
+							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
+								Ok bye !!
+							</p>
+							
+						</div>
+					</Scroll>
 					<div className="dt w-100 border-box bg-black ph5 pv2 ph4-ns">
 						
 						<input placeholder="Type a message" type="text" className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
