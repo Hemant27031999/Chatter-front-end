@@ -57,8 +57,8 @@ class Signin extends React.Component {
 		        <h1 className="serif tracked ma0 mb4 pv3">Sign In</h1>
 		        <div>
 		          <div className="mb3">
-		            <label htmlFor="username" className="db f6 white-80 ttu ph2 mb2">Username</label>
-		            <input type="text" name="username" onChange={ this.onEmailChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
+		            <label htmlFor="username" className="db f6 white-80 ttu ph2 mb2">Email</label>
+		            <input type="email" name="username" onChange={ this.onEmailChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
 		          </div>
 		          <div className="mb4">
 		            <label htmlFor="password" className="db f6 white-80 ttu ph2 mb2">Password</label>

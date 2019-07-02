@@ -5,7 +5,6 @@ class Mcardlist extends React.Component {
 
 	constructor(props){
 		super(props);
-		console.log("In Mcardlist");
 	}
 
 	cardComponent = this.props.msges.map((user, i) => {

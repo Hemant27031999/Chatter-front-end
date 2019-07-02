@@ -7,7 +7,8 @@ class Card extends React.Component {
 		this.state = {
 			name: this.props.name,
 			imageURL: this.props.imageURL,
-			email: this.props.email
+			email: this.props.email,
+			msgDatabase: this.props.msgDatabase
 		}
 	}
 
@@ -15,7 +16,8 @@ class Card extends React.Component {
 		this.setState({
 			'name': this.props.name, 
 			'email': this.props.email,
-			'imageURL': this.props.imageURL
+			'imageURL': this.props.imageURL,
+			'msgDatabase': this.props.msgDatabase
 		})
 		this.props.loadChattingUser(this.state);
 	}

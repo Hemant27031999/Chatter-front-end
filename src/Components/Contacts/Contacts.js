@@ -16,7 +16,8 @@ class Contacts extends React.Component {
 			friend: {
 				name: '',
 				imageURL: '',
-				status: ''
+				status: '',
+				msgDatabase: ''
 			},
 			msgingChat: []
 		}
@@ -24,31 +25,37 @@ class Contacts extends React.Component {
 
 
 	loadChattingUser = (loadingData) => {
+		this.setState({ 'msgingChat': [] });
+		console.log(loadingData.msgDatabase);
 		this.setState({friend: {
         'name': loadingData.name,
         'imageURL': loadingData.imageURL,
-        'status':loadingData.status
+        'email':loadingData.email,
+        'msgDatabase': loadingData.msgDatabase
     }})
-
-		var database = "rukefriendleticia";   //this.state.name+"friend"+this.state.friend.name
-
+		// var database= "rukefriendleticia";
+		
+		var database=loadingData.msgDatabase;
+		console.log(database);
 		fetch('http://localhost:3000/msges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
-				database: database
+				database:  database
 			})
 		})
 			.then(response => response.json())
 			.then(data => {
 				if(data.length !== 0){
-					console.log(this.state.friend);
 					this.setState({
 						msgingChat:data
 					})
-					console.log(this.state.msgingChat);
 				}
 			})
+
+			console.log(this.state.friend.name);
+			console.log(this.state.friend.msgDatabase);
+			console.log(this.state.msgingChat);
 	}
 
 	render(){

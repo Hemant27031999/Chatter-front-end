@@ -1,21 +1,26 @@
 import React from 'react';
 
-const Mcard = (props) => {
-	console.log("In Mcard");
-	console.log(props.msg);
+class Mcard extends React.Component {
+
+	constructor(props){
+		super(props);
+	}
+
+	render(){
 	return (
 		<div>
-		{	props.name === "Ruke"?
+		{	this.props.name === "Ruke"?
 		<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
-			{props.msg}
+			{this.props.msg}
 		</p>:
 		<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
-			{props.msg}
+			{this.props.msg}
 		</p>
 		
 		}
 	</div>
 	);
+}
 }
 
 export default Mcard;
