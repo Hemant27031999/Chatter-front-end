@@ -13,12 +13,12 @@ class Card extends React.Component {
 	}
 
 	fillChat = () => {
-		this.setState({
-			'name': this.props.name, 
-			'email': this.props.email,
-			'imageURL': this.props.imageURL,
-			'msgDatabase': this.props.msgDatabase
-		})
+		// this.setState({
+		// 	'name': this.props.name, 
+		// 	'email': this.props.email,
+		// 	'imageURL': this.props.imageURL,
+		// 	'msgDatabase': this.props.msgDatabase
+		// })
 		this.props.loadChattingUser(this.state);
 	}
 

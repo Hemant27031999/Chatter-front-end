@@ -1,5 +1,4 @@
 import React from 'react';
-// import './Contacts.css';
 import Scroll from '../Scroll/Scroll';
 import Cardlist from '../Card/Cardlist';
 import Mcardlist from '../MsgCard/Mcardlist';
@@ -19,24 +18,25 @@ class Contacts extends React.Component {
 				status: '',
 				msgDatabase: ''
 			},
-			msgingChat: []
+			msgingChat: [],
+			msg:''
 		}
 	}
 
 
 	loadChattingUser = (loadingData) => {
-		this.setState({ 'msgingChat': [] });
-		console.log(loadingData.msgDatabase);
+
+		this.setState({ 'msgingChat': [] }, () => {console.log("CheckPoint1");});
+		
 		this.setState({friend: {
         'name': loadingData.name,
         'imageURL': loadingData.imageURL,
         'email':loadingData.email,
         'msgDatabase': loadingData.msgDatabase
-    }})
-		// var database= "rukefriendleticia";
-		
+    }}, () => {console.log("CheckPoint2");})
+
 		var database=loadingData.msgDatabase;
-		console.log(database);
+		
 		fetch('http://localhost:3000/msges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
@@ -49,16 +49,44 @@ class Contacts extends React.Component {
 				if(data.length !== 0){
 					this.setState({
 						msgingChat:data
-					})
+					}, () => {console.log("CheckPoint3");})
 				}
 			})
+	}
 
-			console.log(this.state.friend.name);
-			console.log(this.state.friend.msgDatabase);
-			console.log(this.state.msgingChat);
+	onInputChange = (event) => {
+    this.setState({ msg:event.target.value });
+  	}
+
+	updateMsgingChat = () => {
+		// this.setState({ 'msgingChat': [] });
+		fetch('http://localhost:3000/newmsges',{
+			method: 'post',
+			headers: {'Content-Type':'application/json'},
+			body:JSON.stringify({
+				database:  this.state.msgDatabase,
+				name: this.state.name,
+				msg: this.state.msg
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				if(data.length !== 0){
+					this.setState({
+						msgingChat:data}, () => {
+						  alert("updating state");
+						  console.log(this.state.msgingChat[this.state.msgingChat.length-1]);
+						  this.forceUpdate();
+						})
+				}
+			})
+			alert("Running func updateMsgingChat");
+			
+			// this.setState(this.state); 
 	}
 
 	render(){
+		alert("Rendering");
 		const { onRouteChange } = this.props;
 	return(
 
@@ -101,6 +129,7 @@ class Contacts extends React.Component {
 					<h1 className="">....................................................................</h1>
 				</div>:
 				<div>
+
 		         	<div className="dt v-top w-100 border-box bg-near-black ph5 pv2 ph4-ns">
 					  <div className="dtc v-mid mid-gray  w-40" >
 					    <img src={ this.state.friend.imageURL } className="dib w3 v-mid h3 br-100" alt="Site Name" />
@@ -115,13 +144,13 @@ class Contacts extends React.Component {
 
 					<Scroll className="bg-washed-yellow">
 						<div className="w-100 border-box bg-washed-yellow ph5 pv2 ph4-ns mv1 db" style={{height: '710px', fontFamily: 'Bree Serif' }} >
-							<Mcardlist msges={ this.state.msgingChat } />
+							<Mcardlist msges={ this.state.msgingChat } updateMsgingChat = { this.updateMsgingChat } />
 						</div>
 					</Scroll>
+
 					<div className="dt w-100 border-box bg-black ph5 pv2 ph4-ns">
-						
-						<input placeholder="Type a message" type="text" className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
-	      				<input type="submit" value="Send" className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" />
+						<input placeholder="Type a message" type="text" onChange={ this.onInputChange } className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
+	      				<input type="submit" value="Send" onClick={ this.updateMsgingChat } className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" />
 					</div>
 				</div>
 				}
