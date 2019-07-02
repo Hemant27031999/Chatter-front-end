@@ -9,7 +9,6 @@ class Card extends React.Component {
 			imageURL: this.props.imageURL,
 			email: this.props.email
 		}
-		console.log("In Card");
 	}
 
 	fillChat = () => {
@@ -18,7 +17,6 @@ class Card extends React.Component {
 			'email': this.props.email,
 			'imageURL': this.props.imageURL
 		})
-		console.log(this.state);
 		this.props.loadChattingUser(this.state);
 	}
 

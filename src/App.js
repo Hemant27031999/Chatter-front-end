@@ -13,7 +13,8 @@ const initialState = {
         'email':'',
         'password':'',
         'joined': ''
-      }
+      },
+      friendslist: []
     }
 
 
@@ -24,15 +25,18 @@ class App extends Component {
     this.state = initialState;
   }
 
-   loadUser = (data) => {
+   loadUser = (data, friends) => {
     // this.setState(initialState);
-    this.setState({user: {
+    this.setState({
+      user: {
         'id': data.id,
         'name':data.name,
         'email':data.email,
         'password': data.password,
         'joined': data.joined
-    }})
+    },
+      friendslist: friends
+  })
   }
 
   onRouteChange = (route) => {
@@ -49,7 +53,7 @@ class App extends Component {
           <Signin loadUser = { this.loadUser } onRouteChange = { this.onRouteChange }  />:
           ( this.state.route === 'register'?
             <Register loadUser = { this.loadUser } onRouteChange = { this.onRouteChange }   />:
-            <Contacts user = { this.state.user } onRouteChange = { this.onRouteChange } />
+            <Contacts data = { this.state } onRouteChange = { this.onRouteChange } />
           )
         }
     </div>

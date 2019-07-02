@@ -1,7 +1,8 @@
 import React from 'react';
 // import './Contacts.css';
 import Scroll from '../Scroll/Scroll';
-import Cardlist from '../Card/Cardlist'
+import Cardlist from '../Card/Cardlist';
+import Mcardlist from '../MsgCard/Mcardlist';
 
 
 class Contacts extends React.Component {
@@ -9,71 +10,15 @@ class Contacts extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			name: this.props.user.name,
+			name: this.props.data.user.name,
 			imageURL: 'http://mrmrs.github.io/photos/p/3.jpg',
-			friendslist: [
-						    {
-						        "id": 1,
-						        "name": "Young Gatchell",
-						        "email": "young@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/2.jpg",
-						        "lastmsg": "2019-06-29T19:19:53.046Z"
-						    },
-						    {
-						        "id": 2,
-						        "name": "Deirdre Lachance",
-						        "email": "deirdre@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/4.jpg",
-						        "lastmsg": "2019-02-12T02:19:23.046Z"
-						    },
-						    {
-						        "id": 3,
-						        "name": "Cleveland Ridout",
-						        "email": "cleve@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/6.jpg",
-						        "lastmsg": "2019-02-12T22:04:23.046Z"
-						    },
-						    {
-						        "id": 4,
-						        "name": "Leticia Fearon",
-						        "email": "leticia@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/7.jpg",
-						        "lastmsg": "2019-04-22T00:13:23.046Z"
-						    },
-						    {
-						        "id": 5,
-						        "name": "Ahmad Backer",
-						        "email": "ahmed@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/8.jpg",
-						        "lastmsg": "2019-05-11T02:43:23.046Z"
-						    },
-						    {
-						        "id": 6,
-						        "name": "Carlie Noakes",
-						        "email": "carlie@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/9.jpg",
-						        "lastmsg": "2019-05-11T00:43:34.046Z"
-						    },
-						    {
-						        "id": 7,
-						        "name": "Frederic Starner",
-						        "email": "frederic@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/5.jpg",
-						        "lastmsg": "2019-02-22T19:42:23.046Z"
-						    },
-						    {
-						        "id": 8,
-						        "name": "Arnoldo Degraff",
-						        "email": "arnoldo@gmil.com",
-						        "imageurl": "http://mrmrs.github.io/photos/p/3.jpg",
-						        "lastmsg": "2019-02-10T19:19:23.046Z"
-						    }
-						],
+			friendslist: this.props.data.friendslist,
 			friend: {
 				name: '',
 				imageURL: '',
 				status: ''
-			}
+			},
+			msgingChat: []
 		}
 	}
 
@@ -84,6 +29,26 @@ class Contacts extends React.Component {
         'imageURL': loadingData.imageURL,
         'status':loadingData.status
     }})
+
+		var database = "rukefriendleticia";   //this.state.name+"friend"+this.state.friend.name
+
+		fetch('http://localhost:3000/msges',{
+			method: 'post',
+			headers: {'Content-Type':'application/json'},
+			body:JSON.stringify({
+				database: database
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				if(data.length !== 0){
+					console.log(this.state.friend);
+					this.setState({
+						msgingChat:data
+					})
+					console.log(this.state.msgingChat);
+				}
+			})
 	}
 
 	render(){
@@ -122,7 +87,7 @@ class Contacts extends React.Component {
 
 
 			<div className="dtc w6-ns pa1 ba b--black-20 bg-light-silver vh-100" >
-				{this.state.friend.name === ''?
+				{this.state.msgingChat.length === 0?
 				<div className="tc f4">
 					<h1 className="">....................................................................</h1>
 					<h1 className="pv5 ph4 f-headline lh-solid" style={{ fontFamily: 'Barriecito' }}>WELCOME TO CHATTER, {this.state.name}</h1>
@@ -143,35 +108,7 @@ class Contacts extends React.Component {
 
 					<Scroll className="bg-washed-yellow">
 						<div className="w-100 border-box bg-washed-yellow ph5 pv2 ph4-ns mv1 db" style={{height: '710px', fontFamily: 'Bree Serif' }} >
-							
-							<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
-								YoYo! Hello everyone this is Hemant And I'm working on a fantastic app
-							</p>
-							
-							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
-								Oh!!! That's good hemant.... Keep it up :D YoYo! Hello everyone this is Hemant And I'm working on a fantastic app
-							</p>
-							
-							<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
-								YoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic app
-							</p>
-							
-							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
-								Mention not bro YoYo! Hello everyone this is Hemant And I'm working on a fantastic appYoYo! Hello everyone this is Hemant And I'm working on a fantastic app
-							</p>
-							
-							<p className="f5 fl w-60 link br3 ph3 pv2 mb2 white bg-dark-green">
-								Oh Thanks man !!
-							</p>
-							
-							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
-								Oh Thanks man 
-							</p>
-							
-							<p className="f5 fr w-60 link br3 ph3 pv2 mb2 white bg-near-black">
-								Ok bye !!
-							</p>
-							
+							<Mcardlist msges={ this.state.msgingChat } />
 						</div>
 					</Scroll>
 					<div className="dt w-100 border-box bg-black ph5 pv2 ph4-ns">

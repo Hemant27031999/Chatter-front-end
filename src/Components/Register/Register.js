@@ -24,7 +24,6 @@ class Register extends React.Component {
 	}
 
 	onSubmitSignIn = () => {
-		console.log("it worked");
 		fetch('http://localhost:3000/register',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
@@ -34,14 +33,7 @@ class Register extends React.Component {
 				password: this.state.password
 			})
 		})
-			// .then(response => response.json())
-			// .then(user => {
-			// 	if(user.id){
-			// 		// this.props.loadUser(user);
-			// 		this.props.onRouteChange('signin');
-			// 	}
-			// })
-			// .catch(err => console.log(err));
+
 			this.props.onRouteChange('home');
 	}
 
