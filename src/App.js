@@ -8,11 +8,8 @@ import Signin from './Components/Signin/Signin';
 const initialState = {
       route: 'signin',
       user: {
-        'id': '',
         'name':'',
-        'email':'',
-        'password':'',
-        'joined': ''
+        'email':''
       },
       friendslist: []
     }
@@ -26,14 +23,10 @@ class App extends Component {
   }
 
    loadUser = (data, friends) => {
-    // this.setState(initialState);
     this.setState({
       user: {
-        'id': data.id,
         'name':data.name,
-        'email':data.email,
-        'password': data.password,
-        'joined': data.joined
+        'email':data.email
     },
       friendslist: friends
   })

@@ -5,6 +5,7 @@ class Cardlist extends React.Component {
 
 	constructor(props){
 		super(props);
+		console.log("Clicked");
 	}
 
 	cardComponent = this.props.friendlist.map((user, i) => {
