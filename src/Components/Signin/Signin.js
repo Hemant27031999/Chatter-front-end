@@ -30,7 +30,6 @@ class Signin extends React.Component {
 			.then(response => response.json())
 			.then(data => {
 				if(data.id){
-
 					fetch('http://localhost:3000/contacts',{
 						method: 'post',
 						headers: {'Content-Type':'application/json'}
@@ -42,7 +41,13 @@ class Signin extends React.Component {
 								this.props.onRouteChange('home');
 							}
 						})
+						.catch(err => {
+							console.log(err);
+						})
 				}
+			})
+			.catch(err => {
+				console.log(err);
 			})
 	}
 

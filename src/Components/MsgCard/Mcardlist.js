@@ -1,17 +1,26 @@
 import React from 'react';
 import Mcard from './Mcard';
 
-const Mcardlist = ({ msges }) => {
+class Mcardlist extends React.Component {
 
-	const cardComponent = msges.map((user, i) => {
-		return <Mcard key={i} id={msges[i].id} name = {msges[i].name} msg={msges[i].msg} />
-	})
-	
-	return (
-		<div>
-		  	{cardComponent}
-	  	</div>	
-	);
+	constructor(props){
+		super(props);
+	}
+
+	render() {
+    const McardComponent = this.props.msges.map((user, i) => {
+      return (
+        <Mcard
+          key={i}
+          id={this.props.msges[i].id}
+          name={this.props.msges[i].name}
+          msg={this.props.msges[i].msg}
+        />
+      );
+    });
+
+    return <div>{ McardComponent }</div>;
+  }
 }
 
 export default Mcardlist;
