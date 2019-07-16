@@ -33,7 +33,8 @@ class Contacts extends React.Component {
 			generallist: [],
 			branch: 'welcome',
 			test:'',
-			rqstlist: []
+			rqstlist: [],
+			inMsgField: ''
 		}
 	}
 
@@ -41,18 +42,40 @@ class Contacts extends React.Component {
 
 	    Pusher.logToConsole = true;
 
-		var pusher = new Pusher('7c4198eef984dd85a08e', {
-          cluster: 'ap2',
-          forceTLS: true
-        });
+	    var pusher = new Pusher('7c4198eef984dd85a08e', {
+	      cluster: 'ap2',
+	      forceTLS: true
+	    });
 
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', data => {
-          this.setState({ branch: 'welcome',
-      					  test: 'notified'	});
-          console.log(this.state.test + "Testing")
-        });	
-        // this.scrollToBottom();
+	    var channel = pusher.subscribe('my-channel');
+	    channel.bind('my-event', function(data) {
+	      alert(JSON.stringify(data));
+	    });
+
+  //       var channel = pusher.subscribe(`${this.props.data.user.name}-channel`);
+  //       console.log(`${this.props.data.user.name}-channel`);
+  //       channel.bind('my-event', data => {
+  // //         fetch('http://localhost:3000/newmsges',{
+		// // 	method: 'post',
+		// // 	headers: {'Content-Type':'application/json'},
+		// // 	body:JSON.stringify({
+		// // 		database:  data.database,
+		// // 		name: this.state.name,
+		// // 		msg: "@nomsg@",
+		// // 		toperson: ""
+		// // 	})
+		// // })
+		// // 	.then(response => response.json())
+		// // 	.then(data => {
+		// // 		if(data.length !== 0){
+		// // 			this.setState({
+		// // 				msgingChat: data})
+		// // 			}
+		// // 		})
+
+		// alert("You got a msg buddy !");
+  //       });	
+
 	}
 
 
@@ -102,7 +125,10 @@ class Contacts extends React.Component {
 	}
 
 	onInputChange = (event) => {
-	    this.setState({ msg:event.target.value });
+	    this.setState({ 
+	    	inMsgField: event.target.value,
+	    	msg:event.target.value 
+	    });
 	  	}
 
 	toSearch = () => {
@@ -145,28 +171,27 @@ class Contacts extends React.Component {
 	}
 
 	updateMsgingChat = () => {
-		// this.setState({ 'msgingChat': [] });
+
 		fetch('http://localhost:3000/newmsges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
 				database:  this.state.msgDatabase,
 				name: this.state.name,
-				msg: this.state.msg
+				msg: this.state.msg,
+				toperson: this.state.friend.name
 			})
 		})
 			.then(response => response.json())
 			.then(data => {
 				if(data.length !== 0){
 					this.setState({
-						msgingChat:data}, () => {
-						  console.log(this.state.msgingChat[this.state.msgingChat.length-1]);
-						  this.forceUpdate();
-						})
+						msgingChat:data})
 					}
 				})
-			this.refs.msgInput.value = '';
+			// this.refs.msgInput.value = '';
 
+		this.setState({ inMsgField: '' })
 	}
 
 	confirmed = () => {
@@ -258,7 +283,7 @@ class Contacts extends React.Component {
 					</ScrollToBottom>
 
 					<div className="dt w-100 border-box bg-black ph1 pv2 ph1-ns">
-						<input placeholder="Type a message" type="text" ref="msgInput"  onChange={ this.onInputChange } className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
+						<input placeholder="Type a message" type="text" value={ this.state.inMsgField } ref="msgInput"  onChange={ this.onInputChange } className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
 	      				<button value="Send" onClick={ this.updateMsgingChat } className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" >Send</button>
 					</div>
 				</div>:
@@ -295,56 +320,3 @@ class Contacts extends React.Component {
 }
 
 export default Contacts;
-
-
-
-// this.state.branch === 'chat'?
-// 				(this.state.branch === 'chat'?
-// 				<div>
-// 		         	<div className="dt v-top w-100 border-box bg-near-black ph5 pv2 ph4-ns">
-// 					  <div className="dtc v-mid mid-gray  w-40" >
-// 					    <img src={ this.state.friend.imageURL } className="dib w3 v-mid h3 br-100" alt="Site Name" />
-// 					    <p className="f6 moon-gray v-mid pl4 f4-ns dib " >{ this.state.friend.name }</p>
-// 					  </div>
-// 					  <div className="dtc v-mid w-60 tr">
-// 					    <div className="link dim f6 moon-gray f4-ns dib mr3 mr4-ns" title="About">Services</div>
-// 					    <div className="link dim f6 moon-gray f4-ns dib mr3 mr4-ns" title="Store">Blog</div>
-// 					    <div className="link dim f6 moon-gray f4-ns dib" title="Contact">Join Us</div>
-// 					  </div>
-// 					</div>
-
-// 					<Scroll className="bg-washed-yellow">
-// 						<div className="w-100 border-box bg-washed-yellow ph5 pv2 ph4-ns mv1 db" style={{height: '710px', fontFamily: 'Bree Serif' }} >
-// 							<Mcardlist msges={ this.state.msgingChat } />
-// 						</div>
-// 					</Scroll>
-
-// 					<div className="dt w-100 border-box bg-black ph1 pv2 ph1-ns">
-// 						<input placeholder="Type a message" type="text" onChange={ this.onInputChange } className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
-// 	      				<button value="Send" onClick={ this.updateMsgingChat } className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" >Send</button>
-// 					</div>
-// 				</div>:
-// 				<div className="tc f4 mh3">
-// 					<h1 className="ba b--black-20 f4 mb3 pa3 w-100 border-box bg-near-white"> Friend Requests</h1>
-// 				    <Scroll className="bg-black">
-// 					    <div>
-// 						    <Cardlist mainuser = { "Follow" } friendrqstlist={ this.state.rqstlist } />
-// 					    </div>
-// 				    </Scroll>
-// 			    </div>):
-// 				( this.state.branch === 'welcome'?
-// 				<div className="tc f4 white">
-// 					<h1 className="">....................................................................</h1>
-// 					<h1 className="pv5 ph4 f-headline lh-solid" style={{ fontFamily: 'Barriecito' }}>WELCOME TO CHATTER, {this.state.name}</h1>
-// 					<h1 className="">....................................................................</h1>
-// 				</div>:
-// 				<div className="tc f4 mh3">
-// 					<input id="srchfrnd" onChange={ this.onSearchChangeNewfrnd } className="input-reset ba b--black-20 f4 mb3 pa3 w-100 border-box bg-near-white" type="text" placeholder='Search New Friends' />
-// 				    <Scroll className="bg-black">
-// 					    <div>
-// 						    <Cardlist mainuser = { this.state.name} friendlist={ filtersearchfriendslist } />
-// 					    </div>
-// 				    </Scroll>
-// 			    </div>
-// 				)
-// 				}
