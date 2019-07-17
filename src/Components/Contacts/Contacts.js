@@ -39,7 +39,7 @@ class Contacts extends React.Component {
 	}
 
 	componentDidMount() {
-
+		
 	    Pusher.logToConsole = true;
 
 	    var pusher = new Pusher('7c4198eef984dd85a08e', {
@@ -48,34 +48,9 @@ class Contacts extends React.Component {
 	    });
 
 	    var channel = pusher.subscribe('my-channel');
-	    channel.bind('my-event', function(data) {
+	    channel.bind('my-event', data => {
 	      alert(JSON.stringify(data));
 	    });
-
-  //       var channel = pusher.subscribe(`${this.props.data.user.name}-channel`);
-  //       console.log(`${this.props.data.user.name}-channel`);
-  //       channel.bind('my-event', data => {
-  // //         fetch('http://localhost:3000/newmsges',{
-		// // 	method: 'post',
-		// // 	headers: {'Content-Type':'application/json'},
-		// // 	body:JSON.stringify({
-		// // 		database:  data.database,
-		// // 		name: this.state.name,
-		// // 		msg: "@nomsg@",
-		// // 		toperson: ""
-		// // 	})
-		// // })
-		// // 	.then(response => response.json())
-		// // 	.then(data => {
-		// // 		if(data.length !== 0){
-		// // 			this.setState({
-		// // 				msgingChat: data})
-		// // 			}
-		// // 		})
-
-		// alert("You got a msg buddy !");
-  //       });	
-
 	}
 
 
@@ -114,9 +89,6 @@ class Contacts extends React.Component {
 
 	onSearchChangeContactfrnd = (event) => {
 		this.setState({ searchfield: event.target.value});
-		// channel.bind('my-event', function(data) {
-  //         alert(JSON.stringify(data));
-  //       });
 	}
 
 	onSearchChangeNewfrnd = (event) => {
@@ -147,7 +119,6 @@ class Contacts extends React.Component {
 						})
 					}
 				})
-
 	}
 
 	myRequests = () => {
@@ -189,7 +160,6 @@ class Contacts extends React.Component {
 						msgingChat:data})
 					}
 				})
-			// this.refs.msgInput.value = '';
 
 		this.setState({ inMsgField: '' })
 	}
@@ -218,13 +188,9 @@ class Contacts extends React.Component {
 		return friendslistitem.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
 		});
 
-		// console.log(this.state.generallist);
-
 		var filtersearchfriendslist = this.state.generallist.filter(generallistitem => {
 		return generallistitem.name.toLowerCase().includes(this.state.searchfriends.toLowerCase())
 		});
-
-		// {console.log( filtersearchfriendslist )}
 
 	return(
 
@@ -320,3 +286,28 @@ class Contacts extends React.Component {
 }
 
 export default Contacts;
+
+
+//       var channel = pusher.subscribe(`${this.props.data.user.name}-channel`);
+  //       console.log(`${this.props.data.user.name}-channel`);
+  //       channel.bind('my-event', data => {
+  // //         fetch('http://localhost:3000/newmsges',{
+		// // 	method: 'post',
+		// // 	headers: {'Content-Type':'application/json'},
+		// // 	body:JSON.stringify({
+		// // 		database:  data.database,
+		// // 		name: this.state.name,
+		// // 		msg: "@nomsg@",
+		// // 		toperson: ""
+		// // 	})
+		// // })
+		// // 	.then(response => response.json())
+		// // 	.then(data => {
+		// // 		if(data.length !== 0){
+		// // 			this.setState({
+		// // 				msgingChat: data})
+		// // 			}
+		// // 		})
+
+		// alert("You got a msg buddy !");
+  //       });	
