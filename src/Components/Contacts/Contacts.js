@@ -47,7 +47,7 @@ class Contacts extends React.Component {
 	      forceTLS: true
 	    });
 
-	    var channel = pusher.subscribe('my-channel');
+	    var channel = pusher.subscribe(`${this.props.data.user.name}-channel`);
 
 	    channel.bind('my-event', data => {
 
