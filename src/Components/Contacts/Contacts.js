@@ -48,8 +48,27 @@ class Contacts extends React.Component {
 	    });
 
 	    var channel = pusher.subscribe('my-channel');
+
 	    channel.bind('my-event', data => {
-	      alert(JSON.stringify(data));
+
+	      fetch('http://localhost:3000/newmsges',{
+			method: 'post',
+			headers: {'Content-Type':'application/json'},
+			body:JSON.stringify({
+				database:  data.database,
+				name: this.state.name,
+				msg: "@nomsg@",
+				toperson: ""
+			})
+		})
+			.then(response => response.json())
+			.then(data => {
+				if(data.length !== 0){
+					this.setState({
+						msgingChat: data})
+					}
+				})
+
 	    });
 	}
 
