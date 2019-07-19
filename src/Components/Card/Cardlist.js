@@ -7,15 +7,16 @@ class Cardlist extends React.Component {
   }
 
   render() {
+    var size = this.props.friendlist.length; 
     const cardComponent = this.props.friendlist.map((user, i) => {
       return (
         <Card
           key={i}
-          id={this.props.friendlist[i].id}
-          name={this.props.friendlist[i].name}
-          imageURL={this.props.friendlist[i].imageurl}
-          email={this.props.friendlist[i].email}
-          msgDatabase={this.props.friendlist[i].msgdata}
+          id={this.props.friendlist[size-i-1].id}
+          name={this.props.friendlist[size-i-1].name}
+          imageURL={this.props.friendlist[size-i-1].imageurl}
+          email={this.props.friendlist[size-i-1].email}
+          msgDatabase={this.props.friendlist[size-i-1].msgdata}
           loadChattingUser={this.props.loadChattingUser}
           parameter = { this.props.parameter } 
           mainuser = { this.props.mainuser }

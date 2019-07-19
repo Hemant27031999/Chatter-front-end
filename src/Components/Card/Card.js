@@ -73,7 +73,7 @@ render(){
           (this.props.parameter === "Confirm"?
 	          <div className="dtc v-mid">
 		        <form className="w-100 tr">
-		          <button className="f6 button-reset bg-washed-red ba b--black-10 dim pointer pv1  black-60" onClick={ this.Confirm } type="submit">{this.state.Confirmationstatus}</button>
+		          <button className="f6 button-reset bg-washed-red  ba b--black-10 dim pointer pv1  black-60" onClick={ this.Confirm } type="submit">{this.state.Confirmationstatus}</button>
 		        </form>
 		      </div>:
 		      <div className="dtc v-mid">

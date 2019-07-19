@@ -10,7 +10,7 @@ const initialState = {
       user: {
         'name':'',
         'email':'',
-        imageurl:''
+        'imageurl':''
       },
       friendslist: []
     }
@@ -39,6 +39,7 @@ class App extends Component {
       this.setState(initialState);
     }
     this.setState({route: route});
+
   }
 
   render(){

@@ -20,8 +20,10 @@ class Contacts extends React.Component {
 			name: this.props.data.user.name,
 			imageURL: this.props.data.user.imageurl,
 			friendslist: this.props.data.friendslist,
+			email: this.props.data.email,
 			friend: {
 				name: '',
+				email: '',
 				imageURL: '',
 				status: '',
 				msgDatabase: ''
@@ -47,7 +49,7 @@ class Contacts extends React.Component {
 	      forceTLS: true
 	    });
 
-	    var channel = pusher.subscribe(`${this.props.data.user.name}-channel`);
+	    var channel = pusher.subscribe(`${this.props.data.user.email}-channel`);
 
 	    channel.bind('my-event', data => {
 
@@ -64,8 +66,24 @@ class Contacts extends React.Component {
 			.then(response => response.json())
 			.then(data => {
 				if(data.length !== 0){
-					this.setState({
-						msgingChat: data})
+
+					fetch('http://localhost:3000/contacts',{
+						method: 'post',
+						headers: {'Content-Type':'application/json'}
+					})
+						.then(result => result.json())
+						.then(friends => {
+							if(friends.length !== 0){
+								this.setState({
+									msgingChat: data,
+									friendslist: friends
+									}, () => { console.log( this.state.friendslist ) })
+								}
+						})
+						.catch(err => {
+							console.log(err);
+						})
+
 					}
 				})
 
@@ -75,14 +93,14 @@ class Contacts extends React.Component {
 
 	loadChattingUser = (loadingData) => {
 
-		this.setState({ 'msgingChat': [] }, () => {console.log("CheckPoint1");});
+		this.setState({ 'msgingChat': [] });
 
 		this.setState({friend: {
 		        'name': loadingData.name,
 		        'imageURL': loadingData.imageURL,
 		        'email':loadingData.email,
 		        'msgDatabase': loadingData.msgDatabase
-		    }}, () => {console.log("CheckPoint2");})
+		    }})
 
 		var database=loadingData.msgDatabase;
 		
@@ -99,7 +117,7 @@ class Contacts extends React.Component {
 					this.setState({
 						msgingChat: data,
 						branch: 'chat'
-					}, () => {console.log("CheckPoint3");})
+					})
 				}
 			})
 
@@ -161,22 +179,40 @@ class Contacts extends React.Component {
 	}
 
 	updateMsgingChat = () => {
+		console.log(this.state.msg)
 
 		fetch('http://localhost:3000/newmsges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
-				database:  this.state.msgDatabase,
+				database:  this.state.friend.msgDatabase,
 				name: this.state.name,
 				msg: this.state.msg,
+				email: this.state.friend.email,
 				toperson: this.state.friend.name
 			})
 		})
 			.then(response => response.json())
 			.then(data => {
 				if(data.length !== 0){
-					this.setState({
-						msgingChat:data})
+
+					fetch('http://localhost:3000/contacts',{
+						method: 'post',
+						headers: {'Content-Type':'application/json'}
+					})
+						.then(result => result.json())
+						.then(friends => {
+							if(friends.length !== 0){
+								this.setState({
+									msgingChat: data,
+									friendslist: friends
+									})
+								}
+						})
+						.catch(err => {
+							console.log(err);
+						})
+
 					}
 				})
 
@@ -286,7 +322,7 @@ class Contacts extends React.Component {
 					<input id="srchfrnd" onChange={ this.onSearchChangeNewfrnd } className="input-reset ba b--black-20 f4 mb3 pa3 w-100 border-box bg-near-white" type="text" placeholder='Search New Friends' />
 				    <Scroll className="bg-black">
 					    <div>
-						    <Cardlist mainuser = { this.state.name} parameter = { "searchfrnds" } friendlist={ filtersearchfriendslist } />
+						    <Cardlist mainuser = { this.state.name } parameter = { "searchfrnds" } friendlist={ filtersearchfriendslist } />
 					    </div>
 				    </Scroll>
 			    </div>:
