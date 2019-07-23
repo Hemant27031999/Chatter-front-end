@@ -13,6 +13,7 @@ class Card extends React.Component {
 		}
 	}
 
+
 	follow = () => {
 		fetch('http://localhost:3000/frndrqst',{
 			method: 'post',
@@ -25,9 +26,10 @@ class Card extends React.Component {
 			.then(response => response.json())
 			.then(data => {
 				if(data){
-						alert("friend rqst sent !")
+						alert("friend rqst sent !");
 					}
 				})
+			.catch(err => {alert(err);})
 	}
 
 
@@ -58,7 +60,9 @@ class Card extends React.Component {
 
 render(){
 	return (
-		<div className="dt w-100 bb b--black-05 pb2 mt2 pa2 bg-near-white pointer" onClick={ this.fillChat }>
+		<div>
+		{this.props.parameter === "friend"?
+		<div className="dt w-100 bb b--black-05 pb2 mt2 pa2 bg-light-gray pointer" onClick={ this.fillChat }>
 	      <div className="dtc w2 w3-ns v-mid">
 	        <img alt="Profile" src={this.props.imageURL} className="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns"/>
 	      </div>
@@ -66,24 +70,25 @@ render(){
 	        <h1 className="f6 f5-ns fw6 lh-title black mv0">{this.props.name}</h1>
 	        <h2 className="f6 fw4 mt0 mb0 black-60">{this.props.email}</h2>
 	      </div>
-	      { this.props.parameter === "friend"?
-          <div>
-          	
-          </div>:
-          (this.props.parameter === "Confirm"?
-	          <div className="dtc v-mid">
-		        <form className="w-100 tr">
-		          <button className="f6 button-reset bg-washed-red  ba b--black-10 dim pointer pv1  black-60" onClick={ this.Confirm } type="submit">{this.state.Confirmationstatus}</button>
-		        </form>
-		      </div>:
-		      <div className="dtc v-mid">
-		        <form className="w-100 tr">
-		          <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" onClick={ this.follow } type="submit">+ Follow</button>
-		        </form>
-		      </div>
-	      )
-	  	}
-	    </div>
+	    </div>:
+           <div className="dt w-100 bb b--black-05 pb2 mt2 pa2 bg-lightest-blue">
+			      <div className="dtc w2 w3-ns v-mid">
+			        <img alt="Profile" src={this.props.imageURL} className="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns"/>
+			      </div>
+			      <div className="dtc v-mid pl3">
+			        <h1 className="f6 f5-ns fw6 lh-title black mv0">{this.props.name}</h1>
+			        <h2 className="f6 fw4 mt0 mb0 black-60">{this.props.email}</h2>
+			      </div>
+		          	{this.props.parameter === "Confirm"?
+			          <div className="dtc v-mid">
+				          <button className="f6 button-reset bg-light-green  ba b--black-10 dim pointer pv1  black-60" onClick={ this.Confirm } type="submit">{this.state.Confirmationstatus}</button>
+				      </div>:
+				      <div className="dtc v-mid">
+				          <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" onClick={ this.follow } type="submit">+ Follow</button>
+				      </div>}
+			</div>
+		}
+		</div>
 		);
 	}
 }

@@ -69,7 +69,10 @@ class Contacts extends React.Component {
 
 					fetch('http://localhost:3000/contacts',{
 						method: 'post',
-						headers: {'Content-Type':'application/json'}
+						headers: {'Content-Type':'application/json'},
+						body:JSON.stringify({
+							name: this.state.name
+						})
 					})
 						.then(result => result.json())
 						.then(friends => {
@@ -83,7 +86,6 @@ class Contacts extends React.Component {
 						.catch(err => {
 							console.log(err);
 						})
-
 					}
 				})
 
@@ -198,7 +200,10 @@ class Contacts extends React.Component {
 
 					fetch('http://localhost:3000/contacts',{
 						method: 'post',
-						headers: {'Content-Type':'application/json'}
+						headers: {'Content-Type':'application/json'},
+						body:JSON.stringify({
+							name: this.state.name
+						})
 					})
 						.then(result => result.json())
 						.then(friends => {
@@ -222,7 +227,10 @@ class Contacts extends React.Component {
 	confirmed = () => {
 		fetch('http://localhost:3000/contacts',{
 						method: 'post',
-						headers: {'Content-Type':'application/json'}
+						headers: {'Content-Type':'application/json'},
+						body:JSON.stringify({
+							name: this.state.name
+						})
 					})
 						.then(result => result.json())
 						.then(friends => {
@@ -341,28 +349,3 @@ class Contacts extends React.Component {
 }
 
 export default Contacts;
-
-
-//       var channel = pusher.subscribe(`${this.props.data.user.name}-channel`);
-  //       console.log(`${this.props.data.user.name}-channel`);
-  //       channel.bind('my-event', data => {
-  // //         fetch('http://localhost:3000/newmsges',{
-		// // 	method: 'post',
-		// // 	headers: {'Content-Type':'application/json'},
-		// // 	body:JSON.stringify({
-		// // 		database:  data.database,
-		// // 		name: this.state.name,
-		// // 		msg: "@nomsg@",
-		// // 		toperson: ""
-		// // 	})
-		// // })
-		// // 	.then(response => response.json())
-		// // 	.then(data => {
-		// // 		if(data.length !== 0){
-		// // 			this.setState({
-		// // 				msgingChat: data})
-		// // 			}
-		// // 		})
-
-		// alert("You got a msg buddy !");
-  //       });	

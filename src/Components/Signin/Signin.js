@@ -29,17 +29,20 @@ class Signin extends React.Component {
 		})
 			.then(response => response.json())
 			.then(data => {
+				console.log(data.name);
 				if(data.id){
 					fetch('http://localhost:3000/contacts',{
 						method: 'post',
-						headers: {'Content-Type':'application/json'}
+						headers: {'Content-Type':'application/json'},
+						body:JSON.stringify({
+
+							name: data.name
+						})
 					})
 						.then(result => result.json())
 						.then(friends => {
-							if(friends.length !== 0){
 								this.props.loadUser(data, friends);
 								this.props.onRouteChange('home');
-							}
 						})
 						.catch(err => {
 							console.log(err);
