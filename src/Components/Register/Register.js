@@ -63,7 +63,7 @@ class Register extends React.Component {
 				  </div>
 		          <div className="mb3">
 		            <label htmlFor="username" className="db f6 white-80 ttu ph2 mb2">Username</label>
-		            <input type="text" name="username" onChange={ this.onNameChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
+		            <input type="text"  placeholder="First Name" name="username" onChange={ this.onNameChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
 		          </div>
 		          <div className="mb3">
 		            <label htmlFor="username" className="db f6 white-80 ttu ph2 mb2">E-mail</label>

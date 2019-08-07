@@ -55,7 +55,8 @@ class Card extends React.Component {
 
 
 	fillChat = () => {
-		this.props.loadChattingUser(this.state);
+		console.log(this.props);						//database will work weirdly if you will remove this line
+		this.props.loadChattingUser(this.props);
 	}
 
 render(){

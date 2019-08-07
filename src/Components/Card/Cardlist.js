@@ -8,7 +8,7 @@ class Cardlist extends React.Component {
 
   render() {
     var size = this.props.friendlist.length; 
-    const cardComponent = this.props.friendlist.map((user, i) => {
+    var cardComponent = this.props.friendlist.map((user, i) => {
       return (
         <Card
           key={i}
@@ -30,25 +30,3 @@ class Cardlist extends React.Component {
 }
 
 export default Cardlist;
-
-
-
-// 	constructor(props){
-// 		super(props);
-// 		console.log("Clicked");
-// 	}
-
-// 	cardComponent = this.props.friendlist.map((user, i) => {
-// 		return <Card key={i} id={this.props.friendlist[i].id} parameter = { this.props.parameter } mainuser = { this.props.mainuser } confirmed = { this.props.confirmed } name = {this.props.friendlist[i].name} imageURL={this.props.friendlist[i].imageurl} email={this.props.friendlist[i].email} msgDatabase={ this.props.friendlist[i].msgdata } loadChattingUser={ this.props.loadChattingUser } />
-// 	})
-	
-// render(){
-// 	return (
-// 		<div>
-// 		  	{cardComponent}
-// 	  	</div>	
-// 	);
-// }
-// }
-
-// export default Cardlist;

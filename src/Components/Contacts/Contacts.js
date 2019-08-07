@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Scroll from '../Scroll/Scroll';
 import Cardlist from '../Card/Cardlist';
 import Mcardlist from '../MsgCard/Mcardlist';
@@ -20,7 +20,7 @@ class Contacts extends React.Component {
 			name: this.props.data.user.name,
 			imageURL: this.props.data.user.imageurl,
 			friendslist: this.props.data.friendslist,
-			email: this.props.data.email,
+			email: this.props.data.user.email,
 			friend: {
 				name: '',
 				email: '',
@@ -42,6 +42,19 @@ class Contacts extends React.Component {
 
 	componentDidMount() {
 		
+		// Pusher.logToConsole = true;
+
+	 //    var pusher = new Pusher('d29496a4b6da7ece45f8', {
+	 //      cluster: 'ap2',
+	 //      forceTLS: true
+	 //    });
+
+	 //    var channel = pusher.subscribe('my-channel');
+	 //    channel.bind('my-event', function(data) {
+	 //      alert("hello world");
+	 //    });
+
+		
 	    Pusher.logToConsole = true;
 
 	    var pusher = new Pusher('7c4198eef984dd85a08e', {
@@ -50,9 +63,12 @@ class Contacts extends React.Component {
 	    });
 
 	    var channel = pusher.subscribe(`${this.props.data.user.email}-channel`);
+	    // channel.bind('my-event', function(data) {
+	    //   alert("hello world");
+	    // });
 
 	    channel.bind('my-event', data => {
-
+	    	// console.log(`${this.props.data.user.email}-channel`);
 	      fetch('http://localhost:3000/newmsges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
@@ -80,7 +96,7 @@ class Contacts extends React.Component {
 								this.setState({
 									msgingChat: data,
 									friendslist: friends
-									}, () => { console.log( this.state.friendslist ) })
+									})
 								}
 						})
 						.catch(err => {
@@ -88,7 +104,6 @@ class Contacts extends React.Component {
 						})
 					}
 				})
-
 	    });
 	}
 
@@ -119,21 +134,26 @@ class Contacts extends React.Component {
 					this.setState({
 						msgingChat: data,
 						branch: 'chat'
-					})
+					}, () => {
+						// console.log("loadChattingUser");
+						// console.log(this.state);
+					});
 				}
-			})
-
-		this.setState({ 'branch': 'chat' })
+			}) 
+		this.setState({ 'branch': 'chat' });
 	}
+
 
 	onSearchChangeContactfrnd = (event) => {
 		this.setState({ searchfield: event.target.value});
 	}
 
+
 	onSearchChangeNewfrnd = (event) => {
 		this.setState({ searchfriends: event.target.value,
 		 				branch: 'search'});
 	}
+
 
 	onInputChange = (event) => {
 	    this.setState({ 
@@ -141,6 +161,7 @@ class Contacts extends React.Component {
 	    	msg:event.target.value 
 	    });
 	  	}
+
 
 	toSearch = () => {
 		this.setState({ 'generallist': [] });
@@ -160,6 +181,7 @@ class Contacts extends React.Component {
 				})
 	}
 
+
 	myRequests = () => {
 		this.setState({ 'rqstlist': [] });
 		fetch('http://localhost:3000/showfrndrqst',{
@@ -175,13 +197,18 @@ class Contacts extends React.Component {
 					this.setState({
 						branch: 'frndrqst',
 						rqstlist: data
-						}, () => { console.log(this.state.rqstlist) })
+						}, () => { 
+							// console.log(this.state.rqstlist);
+						})
 					}
 				})
 	}
 
+
 	updateMsgingChat = () => {
-		console.log(this.state.msg)
+		console.log("Above msg database");
+		console.log(this.state);
+		// console.log(this.state.friend.msgDatabase);
 
 		fetch('http://localhost:3000/newmsges',{
 			method: 'post',
@@ -211,7 +238,9 @@ class Contacts extends React.Component {
 								this.setState({
 									msgingChat: data,
 									friendslist: friends
-									})
+									}, () => {
+										console.log("updatemsgchat");
+										console.log(this.state); })
 								}
 						})
 						.catch(err => {
@@ -221,8 +250,10 @@ class Contacts extends React.Component {
 					}
 				})
 
-		this.setState({ inMsgField: '' })
+		this.setState({ inMsgField: '' });
 	}
+
+
 
 	confirmed = () => {
 		fetch('http://localhost:3000/contacts',{
@@ -242,6 +273,8 @@ class Contacts extends React.Component {
 						})
 						.catch(err => { console.log(err); })
 	}
+
+
 
 	render(){
 
@@ -271,7 +304,9 @@ class Contacts extends React.Component {
 					        <div className="tl pa2 pointer"> New Group </div>
 					        <div className="tl pa2 pointer" onClick={ this.toSearch }> Search </div>
 					        <div className="tl pa2 pointer" onClick={ this.myRequests }> Requests </div>
-					        <div className="tl pa2 pointer"> Saved </div>
+					        <div className="tl pa2 pointer">
+					        	<input type="file" name = "file" />
+					        </div>
 					        <div className="tl pa2 pointer" onClick={() => onRouteChange('signin')} > Log out </div>
 					    </div>
 				  </div>
@@ -307,7 +342,7 @@ class Contacts extends React.Component {
 						<div className="w-100 border-box ph5 pv2 ph4-ns mv1 db"
 						 	 style={{height: '710px', fontFamily: 'Bree Serif' }} 
 						 	 >
-							<Mcardlist msges={ this.state.msgingChat } />
+							<Mcardlist msges={ this.state.msgingChat } mainuser = { this.state.name }/>
 						</div>
 					</ScrollToBottom>
 
@@ -349,3 +384,23 @@ class Contacts extends React.Component {
 }
 
 export default Contacts;
+
+
+	// onChange = (e) => {
+	// 	let files = e.target.files;
+	// 	let reader = new FileReader();
+	// 	reader.readAsDataURL(files[0]);
+	// 	reader.onload = (e) => {
+	// 		console.log(e.target.result);
+	// 	}
+	// 	let query = this.state.query;
+	// 	fetch(`https://api.imgbb.com/1/upload?key=c10a75e100a54f95368e127f445d194b&image=${e.target.result}`,{
+	// 					method: 'post',
+	// 					headers: {'Content-Type':'application/json'}
+	// 				})
+	// 					.then(result => result.json())
+	// 					.then(friends => {
+	// 						console.log(friends);
+	// 					})
+	// 					.catch(err => { console.log(err); })
+	// }
