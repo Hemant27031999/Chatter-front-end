@@ -7,14 +7,14 @@ import go from '../Signin/goo.svg';
 import chico from '../Signin/chico.png';
 import mail from './mail.svg';
 import link from './link.svg';
-import { fadeIn } from 'react-animations';
+import { zoomIn } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 
 
 const styles = {
-  fadeIn: {
+  zoomIn: {
     animation: 'x 0.5s',
-    animationName: Radium.keyframes(fadeIn, 'fadeIn')
+    animationName: Radium.keyframes(zoomIn, 'zoomIn')
   }
 }
 
@@ -71,37 +71,39 @@ class Register extends React.Component {
 		const { onRouteChange } = this.props;
 	return(
 		<StyleRoot>
-		<div className="tc dt pv5 ph7" style={styles.fadeIn}>
+		<div className="tc dt pv5 ph7" style={styles.zoomIn}>
 			<div className="sans-serif dtc bg-transparent w-30 dib black relative cover bg-top" >
-			 <div id="overlay" className="absolute ma1 absolute--fill bg-dark-gray o-90 z-unset"></div>
+			 <div id="overlay" className="absolute ma1 absolute--fill bg-dark-gray o-90 z-unset  br4"></div>
 
 		      <div className="relative pa4 pa5-m tc">
 		        <h1 className="serif tracked ma0 mb4 b pa3 white br4 f1 tc bg-black"
 		            style={{ fontFamily: 'Luckiest Guy' }}>WELCOME TO CHATTER</h1>
 		        <hr />
 		        <p className="white ph3 f4" style={{ fontFamily: 'Righteous' }}>
-		        	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-				proident.
+		        	Hola friend! This is a simple chat app which offers you realtime messaging with your friends. You can make friends by sending friend request to your known ones.
+		        	Register for free and experience the Chatter app. You are free to provide your valuable suggestions and reviews in the dowm embeded link.
 		        </p>
-		        <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w4-ns h1 h4-ns" src={ chico } alt='Face' width='500px' height='auto'/>
-		      	<div>
+		        <a href="https://docs.google.com/forms/d/e/1FAIpQLSctq5jRd2_uTTuH50QhYL3VSAbzvYF4dFjvYLYaVrQmboivKg/viewform?usp=sf_link">
+		        <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w4-ns h1 h4-ns"
+		         src={ chico } alt='Face' width='500px' height='auto'
+		          />
+		        </a>
+		     	<div>
 		      	<p className="dib mr2" style={{ fontFamily: 'Righteous' }}>
 		        	Made with Love by  
 		        </p>
+		        <a href="https://www.facebook.com/profile.php?id=100004252209945">
 		        <p className="dib white" style={{ fontFamily: 'Luckiest Guy' }}>
 		        	HEMANT YADAV
 		        </p>
+		        </a>
 		        </div>
 		      </div>
 			</div>
 
 
 			<div className="sans-serif dtc bg-transparent w-40 dib black relative cover bg-top" >
-		      <div id="overlay" className="absolute ma1 absolute--fill bg-dark-gray o-90 z-unset"></div>
+		      <div id="overlay" className="absolute ma1 absolute--fill bg-dark-gray o-90 z-unset br4"></div>
 
 		      <div className="relative pa4 pa5-m">
 		        <h1 className="serif tracked ma0 mb4 pv3 white br4 f1 tc bg-black"
@@ -158,9 +160,9 @@ class Register extends React.Component {
 		            <p className="serif tracked  pv1 f6 tc"
 		            style={{ fontFamily: 'Abril Fatface' }}>or</p>
 		            <div className="tc">
-		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" src={ fb } alt='Face' width='500px' height='auto'/>
-		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" src={ ins } alt='Face' width='500px' height='auto'/>
-		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" src={ go } alt='Face' width='500px' height='auto'/>
+		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" title="In Beta Mode" src={ fb } alt='Face' width='500px' height='auto'/>
+		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" title="In Beta Mode" src={ ins } alt='Face' width='500px' height='auto'/>
+		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" title="In Beta Mode" src={ go } alt='Face' width='500px' height='auto'/>
 		          	</div>
 		          </div>
 

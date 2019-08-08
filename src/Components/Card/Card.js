@@ -36,7 +36,7 @@ class Card extends React.Component {
 			.then(response => response.json())
 			.then(data => {
 				if(data){
-						alert("friend rqst sent !");
+						alert("friend rqst sent ! The user will appear in your contact list once he accept your friend request!!!");
 					}
 				})
 			.catch(err => {alert(err);})
@@ -86,19 +86,22 @@ render(){
 	      </div>
 	    </div>:
            <div className="dt w-100 bb b--black-05 pb2 mt2 pa2 bg-lightest-blue">
-			      <div className="dtc w2 w3-ns v-mid">
-			        <img alt="Profile" src={this.props.imageURL} className="ba b--black-10 db br-100 w2 w3-ns h2 h3-ns"/>
+			      <div className="dtc w4 w4-ns v-mid">
+			        <img alt="Profile" src={this.props.imageURL} 
+			        className="ba b--black-10 db br-100 w4 w4-ns h4 h4-ns"/>
 			      </div>
 			      <div className="dtc v-mid pl3">
-			        <h1 className="f6 f5-ns fw6 lh-title black mv0">{this.props.name}</h1>
-			        <h2 className="f6 fw4 mt0 mb0 black-60">{this.props.email}</h2>
+			        <h1 className="f4 f3-ns fw6 lh-title black mv0">{this.props.name}</h1>
+			        <h2 className="f3 fw4 mt0 mb0 black-60">{this.props.email}</h2>
 			      </div>
 		          	{this.props.parameter === "Confirm"?
-			          <div className="dtc v-mid">
-				          <button className="f6 button-reset bg-light-green  ba b--black-10 dim pointer pv1  black-60" onClick={ this.Confirm } type="submit">{this.state.Confirmationstatus}</button>
+			          <div className="dtc tr v-mid pr3">
+				          <button className="f4 button-reset bg-dark-blue ba b--black-10 dim pointer br3 pa3 black-60" 
+				          onClick={ this.Confirm } type="submit" style={{ fontFamily: 'Luckiest Guy' }}>{this.state.Confirmationstatus}</button>
 				      </div>:
-				      <div className="dtc v-mid">
-				          <button className="f6 button-reset bg-white ba b--black-10 dim pointer pv1 black-60" onClick={ this.follow } type="submit">+ Follow</button>
+				      <div className="dtc tr v-mid pr3">
+				          <button className="f4 tr  button-reset bg-dark-green ba b--black-10 dim pointer pa3 br3 gold" 
+				          onClick={ this.follow } type="submit" style={{ fontFamily: 'Luckiest Guy' }}>+ Follow</button>
 				      </div>}
 			</div>
 		}

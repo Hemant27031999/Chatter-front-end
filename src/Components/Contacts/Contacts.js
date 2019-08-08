@@ -5,15 +5,15 @@ import Mcardlist from '../MsgCard/Mcardlist';
 import Pusher from 'pusher-js';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
-import { fadeIn } from 'react-animations';
+import { zoomIn } from 'react-animations';
 import { fadeOut } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 
 
 const styles = {
-  fadeIn: {
+  zoomIn: {
     animation: 'x 0.5s',
-    animationName: Radium.keyframes(fadeIn, 'fadeIn')
+    animationName: Radium.keyframes(zoomIn, 'zoomIn')
   },
   fadeOut: {
     animation: 'x 0.5s',
@@ -216,6 +216,9 @@ class Contacts extends React.Component {
 							// console.log(this.state.rqstlist);
 						})
 					}
+				else{
+					alert("No friend Request !!!");
+				}
 				})
 	}
 
@@ -223,7 +226,6 @@ class Contacts extends React.Component {
 	updateMsgingChat = () => {
 		console.log("Above msg database");
 		console.log(this.state);
-		// console.log(this.state.friend.msgDatabase);
 
 		fetch('http://localhost:3000/newmsges',{
 			method: 'post',
@@ -305,7 +307,7 @@ class Contacts extends React.Component {
 
 	return(
 		<StyleRoot>
-		<div  className="dt w-100 h-100" style={styles.fadeIn}>
+		<div  className="dt w-100 h-100" style={styles.zoomIn}>
 
 			<div className="dtc w-30 vh-100 ba b--black-20 center pa1 bg-light-yellow">
 				<nav className="dt w-100 border-box bg-near-black ph3 pv2 ph3-ns">
@@ -319,7 +321,7 @@ class Contacts extends React.Component {
 					    <div className="child absolute bg-near-black animated infinite bounce delay-2s"  style={{zIndex:1}}>
 					        <div className="tl pa2 pointer" title="In Beta Mode"> Profile</div>
 					        <div className="tl pa2 pointer" title="In Beta Mode"> New Group </div>
-					        <div className="tl pa2 pointer" onClick={ this.toSearch }> Search </div>
+					        <div className="tl pa2 pointer" onClick={ this.toSearch }> Search Friends </div>
 					        <div className="tl pa2 pointer" onClick={ this.myRequests }> Requests </div>
 					        <div className="tl pa2 pointer" onClick={() => onRouteChange('signin')} > Log out </div>
 					    </div>
@@ -332,11 +334,17 @@ class Contacts extends React.Component {
 				placeholder='Search' />
 			    
 			    <Scroll>
+			    {true?
+			    	<div>
+			    		<h1 className="pv5 ph5 f-1 lh-solid" 
+					style={{ fontFamily: 'Barriecito' }}>YOU DON'T HAVE ANY FRIENDS YET, SEND SOMEONE FRIEND REQUEST TO CHAT WITH HIM/HER</h1>
+			    	</div>:
 				    <div >
 					    <Cardlist mainuser = { this.state.name } 
 					    parameter = { "friend" } friendlist={ filterfriendslist } 
 					    loadChattingUser={ this.loadChattingUser } />
 				    </div>
+				}
 			    </Scroll>
 			</div>
 
