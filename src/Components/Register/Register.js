@@ -1,4 +1,22 @@
 import React from 'react';
+import logo from '../Signin/profile.svg';
+import key from '../Signin/key.svg';
+import fb from '../Signin/fb.svg';
+import ins from '../Signin/ins.svg';
+import go from '../Signin/goo.svg';
+import chico from '../Signin/chico.png';
+import mail from './mail.svg';
+import link from './link.svg';
+import { fadeIn } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+
+const styles = {
+  fadeIn: {
+    animation: 'x 0.5s',
+    animationName: Radium.keyframes(fadeIn, 'fadeIn')
+  }
+}
 
 class Register extends React.Component {
 
@@ -52,45 +70,118 @@ class Register extends React.Component {
 	render(){
 		const { onRouteChange } = this.props;
 	return(
-			<div className="sans-serif w-100 white mw6 center relative cover bg-top mt2" style={{backgroundImage: `url(https://www.photocollage.com/pics/logo-en.png)`}}>
-		      <div id="overlay" className="absolute absolute--fill bg-navy o-70 z-unset"></div>
+		<StyleRoot>
+		<div className="tc dt pv5 ph7" style={styles.fadeIn}>
+			<div className="sans-serif dtc bg-transparent w-30 dib black relative cover bg-top" >
+			 <div id="overlay" className="absolute ma1 absolute--fill bg-dark-gray o-90 z-unset"></div>
 
-		      <div className="relative pa4 pa5-m">
-		        <h1 className="serif tracked ma0 mb4 pv3">Register</h1>
-		        <div>
-		          <div className='tc ma'>
-						<img className="ba b--black-10 br-100 w4 w4-ns h4 h4-ns" id = 'inputimage' alt='Face' src={this.state.imageurl} width='500px' height='auto'/>
-				  </div>
-		          <div className="mb3">
-		            <label htmlFor="username" className="db f6 white-80 ttu ph2 mb2">Username</label>
-		            <input type="text"  placeholder="First Name" name="username" onChange={ this.onNameChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
-		          </div>
-		          <div className="mb3">
-		            <label htmlFor="username" className="db f6 white-80 ttu ph2 mb2">E-mail</label>
-		            <input type="email" name="email" onChange={ this.onEmailChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
-		          </div>
-		          <div className="mb4">
-		            <label htmlFor="password" className="db f6 white-80 ttu ph2 mb2">Password</label>
-		            <input type="password" name="password" onChange={ this.onPasswordChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
-		          </div>
-		          <div className="mb4">
-		            <label htmlFor="imageurl" className="db f6 white-80 ttu ph2 mb2">Image URL</label>
-		            <input type="text" name="imageurl" onChange={ this.onImageurlChange } className="input-reset db w-100 mw-100 white b pv2 ph3 bg-white-30 hover-bg-white-70 hover-gray outline-0 bn br-pill" />
-		          </div>
-		          <div>
-		            <input className="input-reset db w-100 light-gray f6 b ttu tracked pv3 ph3 pointer bg-dark-blue hover-bg-blue bn br-pill"
-		             type="submit" 
-				     value="Register"
-				     onClick={ this.onSubmitSignIn } />
-		          </div>
-		        </div>
-		        
-		        <div className="tc b f6 mt4 o-70 glow pa2 i">
-		           Already Registered ? <p className="white pointer"  onClick={() => onRouteChange('signin')}>Sign In</p>
+		      <div className="relative pa4 pa5-m tc">
+		        <h1 className="serif tracked ma0 mb4 b pa3 white br4 f1 tc bg-black"
+		            style={{ fontFamily: 'Luckiest Guy' }}>WELCOME TO CHATTER</h1>
+		        <hr />
+		        <p className="white ph3 f4" style={{ fontFamily: 'Righteous' }}>
+		        	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident.
+		        </p>
+		        <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w4-ns h1 h4-ns" src={ chico } alt='Face' width='500px' height='auto'/>
+		      	<div>
+		      	<p className="dib mr2" style={{ fontFamily: 'Righteous' }}>
+		        	Made with Love by  
+		        </p>
+		        <p className="dib white" style={{ fontFamily: 'Luckiest Guy' }}>
+		        	HEMANT YADAV
+		        </p>
 		        </div>
 		      </div>
+			</div>
+
+
+			<div className="sans-serif dtc bg-transparent w-40 dib black relative cover bg-top" >
+		      <div id="overlay" className="absolute ma1 absolute--fill bg-dark-gray o-90 z-unset"></div>
+
+		      <div className="relative pa4 pa5-m">
+		        <h1 className="serif tracked ma0 mb4 pv3 white br4 f1 tc bg-black"
+		            style={{ fontFamily: 'Luckiest Guy' }}>Register</h1>
+		        
+		        <div>
+
+		          <div className='tc ma'>
+						<img className="ba b--black-10 br-100 w4 w4-ns h4 h4-ns" 
+						id = 'inputimage' alt='Face' src={this.state.imageurl} 
+						width='500px' height='auto'/>
+				  </div>
+
+		          <div className="v-mid">
+		            <img className="ba dib b--black-10 v-mid br-100 w1 w3-ns h1 h3-ns" 
+		            src={ logo } alt='Face' width='500px' height='auto'/>
+		            <input type="email" placeholder="first name" name="email" 
+		            onChange={ this.onNameChange } 
+		            className="input-reset dib f3 ba bw1 mw-100 p5 black b ma3 pv2 ph3 bg-white hover-bg-white-70 hover-gray outline-0 bn br2" />
+		          </div>
+
+		          <div className="v-mid">
+		            <img className="ba dib b--black-10 v-mid br-100 w1 w3-ns h1 h3-ns" 
+		            src={ mail } alt='Face' width='500px' height='auto'/>
+		            <input type="email" placeholder="user-email" name="email" 
+		            onChange={ this.onEmailChange } 
+		            className="input-reset dib f3 ba bw1 mw-100 p5 black b ma3 pv2 ph3 bg-white hover-bg-white-70 hover-gray outline-0 bn br2" />
+		          </div>
+
+		          <div className="v-mid">
+		          	<img className="ba dib b--black-10 v-mid br-100 w1 w3-ns h1 h3-ns" 
+		          	src={ key } alt='Face' width='500px' height='auto'/>
+		            <input 
+		            type="password" 
+		            name="password" 
+		            placeholder="password" 
+		            onChange={ this.onPasswordChange } 
+		            className="input-reset f3 ba dib mw-100 black b ma3 p5 pv2 ph3 bg-white hover-bg-white-70 hover-gray outline-0 bn br2" />
+		          </div>
+
+		          <div className="mb3 v-mid">
+		            <img className="ba dib b--black-10 v-mid br-100 w1 w3-ns h1 h3-ns" 
+		            src={ link } alt='Face' width='500px' height='auto'/>
+		            <input type="email" placeholder="image URL" name="email" 
+		            onChange={ this.onImageurlChange } 
+		            className="input-reset dib f3 ba bw1 mw-100 p5 black b ma3 pv2 ph3 bg-white hover-bg-white-70 hover-gray outline-0 bn br2" />
+		          </div>
+		       
+		          <div  className="tc">
+		            <input className="input-reset tc white f6 b ttu mh2 w-70 pa3 pointer bg-black hover-bg-near-black bn br-pill" 
+		            value="Register" 
+		            onClick={ this.onSubmitSignIn }
+		            type="submit" />
+		            <p className="serif tracked  pv1 f6 tc"
+		            style={{ fontFamily: 'Abril Fatface' }}>or</p>
+		            <div className="tc">
+		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" src={ fb } alt='Face' width='500px' height='auto'/>
+		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" src={ ins } alt='Face' width='500px' height='auto'/>
+		            <img className="ba dib b--black-10 v-mid mh2 br-100 pointer w1 w2-ns h1 h2-ns" src={ go } alt='Face' width='500px' height='auto'/>
+		          	</div>
+		          </div>
+
+		        </div>
+		        <hr className="mt4"/>
+		        <div className="tc b f6 mt2 glow pa2 i">
+		          Already Registered ?  
+		          <p 
+			          className="white pointer bg-black pa2 mh5 br4" 
+			          onClick={() => onRouteChange('signin')}>
+			          Sign In
+		          </p>
+		        </div>
+		        
+		      </div>
 		    </div>
-    
+
+
+
+    	</div>
+    </StyleRoot>
 		);
 	}
 }

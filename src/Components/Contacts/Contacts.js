@@ -5,9 +5,24 @@ import Mcardlist from '../MsgCard/Mcardlist';
 import Pusher from 'pusher-js';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import { css } from 'glamor';
+import { fadeIn } from 'react-animations';
+import { fadeOut } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+
+const styles = {
+  fadeIn: {
+    animation: 'x 0.5s',
+    animationName: Radium.keyframes(fadeIn, 'fadeIn')
+  },
+  fadeOut: {
+    animation: 'x 0.5s',
+    animationName: Radium.keyframes(fadeOut, 'fadeOut')
+  }
+}
 
 const ROOT_CSS = css({
-  height: 710,
+  height: '1000',
   background: "#FFDFDF"
 });
 
@@ -289,35 +304,38 @@ class Contacts extends React.Component {
 		});
 
 	return(
-
-		<div  className="dt w-100 h-100 ">
+		<StyleRoot>
+		<div  className="dt w-100 h-100" style={styles.fadeIn}>
 
 			<div className="dtc w-30 vh-100 ba b--black-20 center pa1 bg-light-yellow">
 				<nav className="dt w-100 border-box bg-near-black ph3 pv2 ph3-ns">
 				  <div className="dtc v-mid mid-gray  w-25">
-				    <img src = { this.state.imageURL } className="dib w3 v-mid h3 br-100" alt="Site Name" />
-				    <p className="f6 moon-gray v-mid pl4 tr f4-ns dib " > { this.state.name } </p>
-				    <div className="hide-child fr dib tr v-mid f3 moon-gray ">
+				    <img src = { this.state.imageURL } 
+				    className="dib w3 v-mid h3 br-100" alt="Site Name" />
+				    <p className="moon-gray v-mid pl4 tr f3-ns dib" 
+				    style={{ fontFamily: 'Luckiest Guy' }}> { this.state.name } </p>
+				    <div className="hide-child fr dib tr v-mid f3 moon-gray">
 				    <img className="dib w3 v-mid h3" src="http://ice.ethz.ch/images/menu.png" alt="List" />
-					    <div className="child absolute bg-near-black animated infinite bounce delay-2s">
-					        <div className="tl pa2 pointer"> Profile</div>
-					        <div className="tl pa2 pointer"> New Group </div>
+					    <div className="child absolute bg-near-black animated infinite bounce delay-2s"  style={{zIndex:1}}>
+					        <div className="tl pa2 pointer" title="In Beta Mode"> Profile</div>
+					        <div className="tl pa2 pointer" title="In Beta Mode"> New Group </div>
 					        <div className="tl pa2 pointer" onClick={ this.toSearch }> Search </div>
 					        <div className="tl pa2 pointer" onClick={ this.myRequests }> Requests </div>
-					        <div className="tl pa2 pointer">
-					        	<input type="file" name = "file" />
-					        </div>
 					        <div className="tl pa2 pointer" onClick={() => onRouteChange('signin')} > Log out </div>
 					    </div>
 				  </div>
 				  </div>
 				</nav>
 
-				<input id="name" onChange={ this.onSearchChangeContactfrnd } className="input-reset ba b--black-20 pa2 mv2 db w-100 bg-near-white" type="text" placeholder='Search' />
+				<input id="name" onChange={ this.onSearchChangeContactfrnd } 
+				className="input-reset f3 ba b--black-20 pa2 mv2 db w-100 bg-near-white" type="text" 
+				placeholder='Search' />
 			    
 			    <Scroll>
-				    <div>
-					    <Cardlist mainuser = { this.state.name } parameter = { "friend" } friendlist={ filterfriendslist } loadChattingUser={ this.loadChattingUser } />
+				    <div >
+					    <Cardlist mainuser = { this.state.name } 
+					    parameter = { "friend" } friendlist={ filterfriendslist } 
+					    loadChattingUser={ this.loadChattingUser } />
 				    </div>
 			    </Scroll>
 			</div>
@@ -328,27 +346,32 @@ class Contacts extends React.Component {
 				<div>
 		         	<div className="dt v-top w-100 border-box bg-near-black ph5 pv2 ph4-ns">
 					  <div className="dtc v-mid mid-gray  w-40" >
-					    <img src={ this.state.friend.imageURL } className="dib w3 v-mid h3 br-100" alt="Site Name" />
-					    <p className="f6 moon-gray v-mid pl4 f4-ns dib " >{ this.state.friend.name }</p>
+					    <img src={ this.state.friend.imageURL } 
+					    className="dib w3 v-mid h3 br-100" alt="Site Name" />
+					    <p className="f6 moon-gray v-mid pl4 f3-ns dib" 
+					    style={{ fontFamily: 'Luckiest Guy' }}>{ this.state.friend.name }</p>
 					  </div>
 					  <div className="dtc v-mid w-60 tr">
-					    <div className="link dim f6 moon-gray f4-ns dib mr3 mr4-ns" title="About">Services</div>
-					    <div className="link dim f6 moon-gray f4-ns dib mr3 mr4-ns" title="Store">Blog</div>
-					    <div className="link dim f6 moon-gray f4-ns dib" title="Contact">Join Us</div>
+					    <div className="link dim f6 moon-gray f3-ns dib mr3 mr4-ns" style={{ fontFamily: 'Luckiest Guy' }} title="In Beta Mode">Search</div>
+					    <div className="link dim f6 moon-gray f3-ns dib mr3 mr4-ns" style={{ fontFamily: 'Luckiest Guy' }} title="In Beta Mode">Media</div>
+					    <div className="link dim f6 moon-gray f3-ns dib" style={{ fontFamily: 'Luckiest Guy' }} title="In Beta Mode">About</div>
 					  </div>
 					</div>
 
 					<ScrollToBottom  className={ ROOT_CSS } >
 						<div className="w-100 border-box ph5 pv2 ph4-ns mv1 db"
-						 	 style={{height: '710px', fontFamily: 'Bree Serif' }} 
+						 	 style={{height: '1000px', fontFamily: 'Bree Serif' }} 
 						 	 >
 							<Mcardlist msges={ this.state.msgingChat } mainuser = { this.state.name }/>
 						</div>
 					</ScrollToBottom>
 
 					<div className="dt w-100 border-box bg-black ph1 pv2 ph1-ns">
-						<input placeholder="Type a message" type="text" value={ this.state.inMsgField } ref="msgInput"  onChange={ this.onInputChange } className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
-	      				<button value="Send" onClick={ this.updateMsgingChat } className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" >Send</button>
+						<input placeholder="Type a message" type="text" value={ this.state.inMsgField } 
+						ref="msgInput"  onChange={ this.onInputChange } 
+						className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
+	      				<button value="Send" onClick={ this.updateMsgingChat } 
+	      				className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" >Send</button>
 					</div>
 				</div>:
 				(this.state.branch === "frndrqst"?
@@ -371,7 +394,8 @@ class Contacts extends React.Component {
 			    </div>:
 				<div className="tc f4 white">
 					<h1 className="">....................................................................</h1>
-					<h1 className="pv5 ph4 f-headline lh-solid" style={{ fontFamily: 'Barriecito' }}>WELCOME TO CHATTER, {this.state.name}</h1>
+					<h1 className="pv5 ph5 f-headline lh-solid" 
+					style={{ fontFamily: 'Barriecito' }}>WELCOME TO CHATTER, {this.state.name}</h1>
 					<h1 className="">....................................................................</h1>
 				</div>
 				)
@@ -379,6 +403,7 @@ class Contacts extends React.Component {
 			}
 	        </div>
 	    </div>
+	    </StyleRoot>
 		);
 	}
 }
