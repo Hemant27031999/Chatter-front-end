@@ -301,9 +301,30 @@ class Contacts extends React.Component {
 		return friendslistitem.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
 		});
 
-		var filtersearchfriendslist = this.state.generallist.filter(generallistitem => {
-		return generallistitem.name.toLowerCase().includes(this.state.searchfriends.toLowerCase())
+
+		// console.log("User friends");
+		// console.log(this.state.friendslist);
+		// console.log("All users");
+		// console.log(this.state.generallist);
+
+		var namearray = this.state.friendslist.map( (obj) => {
+			return obj.name;
 		});
+
+		// console.log(namearray);
+		// console.log("All userlist ");
+		var finalalluserlist = this.state.generallist.filter( ( el ) => {
+			return !namearray.includes( el.name )} );
+
+		// console.log(finalalluserlist);
+		// alert(finalalluserlist.length);
+
+		// var filtersearchfriendslist=this.state.friendslist;
+		// if(filtersearchfriendslist.length !== 0){
+		// filtersearchfriendslist = finalalluserlist.filter(generallistitem => {
+		// return finalalluserlist.name.toLowerCase().includes(this.state.searchfriends.toLowerCase())
+		// });
+		// }
 
 	return(
 		<StyleRoot>
@@ -334,7 +355,7 @@ class Contacts extends React.Component {
 				placeholder='Search' />
 			    
 			    <Scroll>
-			    {true?
+			    {this.state.friendslist.length === 0?
 			    	<div>
 			    		<h1 className="pv5 ph5 f-1 lh-solid" 
 					style={{ fontFamily: 'Barriecito' }}>YOU DON'T HAVE ANY FRIENDS YET, SEND SOMEONE FRIEND REQUEST TO CHAT WITH HIM/HER</h1>
@@ -377,9 +398,11 @@ class Contacts extends React.Component {
 					<div className="dt w-100 border-box bg-black ph1 pv2 ph1-ns">
 						<input placeholder="Type a message" type="text" value={ this.state.inMsgField } 
 						ref="msgInput"  onChange={ this.onInputChange } 
-						className="mw-100 w-80 f5 input-reset ba b--black-20 pv3 ph4 border-box" />
+						style={{ fontFamily: 'Luckiest Guy' }}
+						className="mw-100 w-80 f5 br3 input-reset ba b--black-20 pv3 ph4 border-box" />
 	      				<button value="Send" onClick={ this.updateMsgingChat } 
-	      				className="input-reset w-20 bg-dark-green white f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" >Send</button>
+	      				style={{ fontFamily: 'Luckiest Guy' }}
+	      				className="input-reset w-20 bg-dark-green white br3 f5 pv2 pv3-ns ph4 ba b--black-80 bg-hover-mid-gray" >Send</button>
 					</div>
 				</div>:
 				(this.state.branch === "frndrqst"?
@@ -396,7 +419,7 @@ class Contacts extends React.Component {
 					<input id="srchfrnd" onChange={ this.onSearchChangeNewfrnd } className="input-reset ba b--black-20 f4 mb3 pa3 w-100 border-box bg-near-white" type="text" placeholder='Search New Friends' />
 				    <Scroll className="bg-black">
 					    <div>
-						    <Cardlist mainuser = { this.state.name } parameter = { "searchfrnds" } friendlist={ filtersearchfriendslist } />
+						    <Cardlist mainuser = { this.state.name } parameter = { "searchfrnds" } friendlist={ finalalluserlist } />
 					    </div>
 				    </Scroll>
 			    </div>:
