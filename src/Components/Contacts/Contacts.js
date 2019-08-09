@@ -273,6 +273,7 @@ class Contacts extends React.Component {
 
 
 	confirmed = () => {
+		alert("You two are now friends ! Signin again to chat with your friend.");
 		fetch('https://agile-headland-13060.herokuap/contacts',{
 						method: 'post',
 						headers: {'Content-Type':'application/json'},
@@ -301,20 +302,13 @@ class Contacts extends React.Component {
 		return friendslistitem.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
 		});
 
-
-		// console.log("User friends");
-		// console.log(this.state.friendslist);
-		// console.log("All users");
-		// console.log(this.state.generallist);
-
 		var namearray = this.state.friendslist.map( (obj) => {
 			return obj.name;
 		});
 
-		// console.log(namearray);
-		// console.log("All userlist ");
 		var finalalluserlist = this.state.generallist.filter( ( el ) => {
-			return !namearray.includes( el.name )} );
+			return !(namearray.includes( el.name ) || namearray.includes( this.props.data.user.name ));
+		});
 
 		// console.log(finalalluserlist);
 		// alert(finalalluserlist.length);

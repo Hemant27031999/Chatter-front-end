@@ -25,6 +25,7 @@ class Card extends React.Component {
 
 
 	follow = () => {
+		if(!(this.props.name === this.props.mainuser)){
 		fetch('https://agile-headland-13060.herokuapp.com/frndrqst',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
@@ -41,6 +42,10 @@ class Card extends React.Component {
 				})
 			.catch(err => {alert(err);})
 	}
+	else{
+		alert("That's you friend!!! You can't send friend request to yourself.")
+	}
+}
 
 
 	Confirm = () => {
