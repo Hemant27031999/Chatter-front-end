@@ -25,7 +25,7 @@ class Card extends React.Component {
 
 
 	follow = () => {
-		fetch('http://localhost:3000/frndrqst',{
+		fetch('https://agile-headland-13060.herokuapp.com/frndrqst',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
@@ -44,7 +44,7 @@ class Card extends React.Component {
 
 
 	Confirm = () => {
-		fetch('http://localhost:3000/confirmfrndrqst',{
+		fetch('https://agile-headland-13060.herokuapp.com/confirmfrndrqst',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({

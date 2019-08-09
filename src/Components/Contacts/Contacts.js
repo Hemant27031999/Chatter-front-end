@@ -84,7 +84,7 @@ class Contacts extends React.Component {
 
 	    channel.bind('my-event', data => {
 	    	// console.log(`${this.props.data.user.email}-channel`);
-	      fetch('http://localhost:3000/newmsges',{
+	      fetch('https://agile-headland-13060.herokuapp.com/newmsges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
@@ -98,7 +98,7 @@ class Contacts extends React.Component {
 			.then(data => {
 				if(data.length !== 0){
 
-					fetch('http://localhost:3000/contacts',{
+					fetch('https://agile-headland-13060.herokuapp.com/contacts',{
 						method: 'post',
 						headers: {'Content-Type':'application/json'},
 						body:JSON.stringify({
@@ -136,7 +136,7 @@ class Contacts extends React.Component {
 
 		var database=loadingData.msgDatabase;
 		
-		fetch('http://localhost:3000/msges',{
+		fetch('https://agile-headland-13060.herokuapp.com/msges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
@@ -180,7 +180,7 @@ class Contacts extends React.Component {
 
 	toSearch = () => {
 		this.setState({ 'generallist': [] });
-		fetch('http://localhost:3000/allusers',{
+		fetch('https://agile-headland-13060.herokuapp.com/allusers',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'}
 		})
@@ -199,7 +199,7 @@ class Contacts extends React.Component {
 
 	myRequests = () => {
 		this.setState({ 'rqstlist': [] });
-		fetch('http://localhost:3000/showfrndrqst',{
+		fetch('https://agile-headland-13060.herokuapp.com/showfrndrqst',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
@@ -227,7 +227,7 @@ class Contacts extends React.Component {
 		console.log("Above msg database");
 		console.log(this.state);
 
-		fetch('http://localhost:3000/newmsges',{
+		fetch('https://agile-headland-13060.herokuapp.com/newmsges',{
 			method: 'post',
 			headers: {'Content-Type':'application/json'},
 			body:JSON.stringify({
@@ -242,7 +242,7 @@ class Contacts extends React.Component {
 			.then(data => {
 				if(data.length !== 0){
 
-					fetch('http://localhost:3000/contacts',{
+					fetch('https://agile-headland-13060.herokuapp.com/contacts',{
 						method: 'post',
 						headers: {'Content-Type':'application/json'},
 						body:JSON.stringify({
@@ -273,7 +273,7 @@ class Contacts extends React.Component {
 
 
 	confirmed = () => {
-		fetch('http://localhost:3000/contacts',{
+		fetch('https://agile-headland-13060.herokuap/contacts',{
 						method: 'post',
 						headers: {'Content-Type':'application/json'},
 						body:JSON.stringify({
