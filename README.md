@@ -10,14 +10,9 @@
 </br>
 
 Chatter is a simple web app made for chatting with your friends. It provide realtime message exchange like any other chat app and has UI like that of WhatsApp Web. It is build on React js platform and has an awesome UI which makes it really attractive. Further it is hosted on heroku so you can view it using the below provided link. The server is a node js server and is also hosted on github as well. View it [here](https://github.com/Hemant27031999/Chatter-back-end).
-
 </br>
-
 I have also developed the corresponding react native app for android and IOS mobile platform which you can view [here](https://github.com/Hemant27031999/Chatter-Native).
-
 </br>
-</br>
-
 Right now, I have covered only the major functionalities, but there are many things that can be developed in the app like signing in using google/facebook, media sharing, profiles page display etc. I have put a tooltip of 'In Beta Mode' for the functionalities which I will develop in future.
 
 </br>
