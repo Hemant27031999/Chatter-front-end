@@ -296,7 +296,11 @@ class Contacts extends React.Component {
 		});
 
 		var finalalluserlist = this.state.generallist.filter( ( el ) => {
-			return !(namearray.includes( el.name ) || namearray.includes( this.props.data.user.name ));
+			return !(namearray.includes( el.name ) || el.name === this.props.data.user.name);
+		});
+
+    var filterfinalalluserlist = finalalluserlist.filter(friendslistitem => {
+		return friendslistitem.name.toLowerCase().includes(this.state.searchfriends.toLowerCase())
 		});
 
 	return(
@@ -392,7 +396,7 @@ class Contacts extends React.Component {
 					<input id="srchfrnd" onChange={ this.onSearchChangeNewfrnd } className="input-reset ba b--black-20 f4 mb3 pa3 w-100 border-box bg-near-white" type="text" placeholder='Search New Friends' />
 				    <Scroll className="bg-black">
 					    <div>
-						    <Cardlist mainuser = { this.state.name } parameter = { "searchfrnds" } friendlist={ finalalluserlist } />
+						    <Cardlist mainuser = { this.state.name } parameter = { "searchfrnds" } friendlist={ filterfinalalluserlist } />
 					    </div>
 				    </Scroll>
 			    </div>:
