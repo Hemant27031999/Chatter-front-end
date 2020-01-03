@@ -65,12 +65,12 @@ class Contacts extends React.Component {
 
 	    var channel = pusher.subscribe(`${this.props.data.user.email}-channel`);
 
-	    channel.bind('my-event', data => {
+	    channel.bind('my-event', datafrompusher => {
 	      fetch('https://agile-headland-13060.herokuapp.com/newmsges',{
   			method: 'post',
   			headers: {'Content-Type':'application/json'},
   			body:JSON.stringify({
-  				database:  data.database,
+  				database:  datafrompusher.database,
   				name: this.state.name,
   				msg: "@nomsg@",
   				toperson: ""
@@ -90,7 +90,8 @@ class Contacts extends React.Component {
 						.then(result => result.json())
 						.then(friends => {
 							if(friends.length !== 0){
-                if(this.state.friend.name === data.fromPerson){
+                
+                if(this.state.friend.name === datafrompusher.fromPerson){
 								this.setState({
 									msgingChat: data,
 									friendslist: friends
